@@ -37,3 +37,42 @@ public:
         return temp->next;
     }
 };
+
+
+/*
+ *the second method to solve this problem.
+ *
+ */
+ 
+ ListNode* mergeList(ListNode* l1, ListNode* l2) {
+        ListNode* ltemp = new ListNode(-1);//temp head
+        ListNode* lt = ltemp;
+        while(l1!=NULL && l2 != NULL) {
+            if(l1->val > l2->val) {
+                lt->next = l2;
+                l2 = l2->next;
+                lt = lt->next;
+            }
+            else {
+                lt -> next = l1;
+                l1 = l1 -> next;
+                lt = lt -> next;
+            }
+        }
+        lt->next = (l1==NULL)?l2:l1;
+        return ltemp->next;
+    }
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        int n = lists.size();
+        if(n == 0)
+            return NULL;
+        while(n>1) {
+          int i = 0, j = n-1;
+          while(i<j) {
+              lists[i] = mergeList(lists[i], lists[j]);
+              n --;
+              i++; j--;
+          }
+        }
+        return lists[0];
+    }
