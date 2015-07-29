@@ -1,0 +1,51 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        map<int, int> map;
+        vector<int> ret;
+        if(nums.size() < 2)
+            return ret;
+        int n = nums.size();
+        int temp = 0;
+        for(int i=0; i<n; i++) {
+            temp = target - nums[i];
+            if(map.count(temp) == 1) {
+                ret.push_back(map[temp]+1);
+                ret.push_back(i+1);
+                return ret;
+            }
+            else {
+                if(map.count(nums[i]) == 0)
+                    map.insert(make_pair(nums[i], i));
+            }
+        }
+        return ret;
+        
+        
+    }
+
+
+/*    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> ret;
+        if(nums.size() < 2)
+            return ret;
+        sort(nums.begin(), nums.end());
+        int i = 0;
+        int j = nums.size() - 1;
+        int temp = 0;
+        while( i < j ) {
+            temp = nums[i] + nums[j];
+            if(temp == target) {
+                ret.push_back(i);
+                ret.push_back(j);
+                return ret;
+            }
+            else if( temp < target)
+                i++;
+            else
+                j--;
+        }
+        return ret;
+    }
+    */
+};
