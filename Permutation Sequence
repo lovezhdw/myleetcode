@@ -37,7 +37,7 @@ public:
         SiglePermutation(str, n+1, k-1);
         string ret = "";
         for(int i=1; i<=n; i++)
-            ret += str[i]+'0';
+            ret += str[i]+'0';  //注意：int 不能 强制转换为string， 将对应的int 转换为char字符然后叠加。
         return ret;
     }
 };
