@@ -1,0 +1,43 @@
+class Solution {
+int num[11];
+
+public:
+
+    void SiglePermutation(int str[], int len, int k) {
+        if(k == 0)
+            return ;
+        int i = 0;
+        int n = len-1;
+        for(i = 1; i<=n; i++) {
+            if(k<num[i])
+                break;
+        }
+        int s = i-1;
+        if(s!=0) {
+            int div = k / num[s];
+            int c = n - s;
+            int temp = str[div+c];
+            for(int j=div; j>0; j--)
+                str[j+c] = str[j+c - 1];
+            str[c] = temp;
+            SiglePermutation(str, len, k%num[s]);
+        }
+        return;
+    }
+    string getPermutation(int n, int k) {
+        num[0] = 0;
+        num[1] = 1;
+        for(int i=2; i<=11; i++)
+            num[i] = i*num[i-1];
+ //       string ret = "";
+        int i = 1;
+        int str[n+1];
+        for(int i=1; i<=n; i++)
+            str[i] = i;
+        SiglePermutation(str, n+1, k-1);
+        string ret = "";
+        for(int i=1; i<=n; i++)
+            ret += str[i]+'0';
+        return ret;
+    }
+};
