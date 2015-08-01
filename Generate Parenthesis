@@ -1,0 +1,45 @@
+#include<cstdio>
+#include<string>
+#include<cstdlib>
+#include<vector>
+#include<iostream>
+
+using namespace std;
+
+class Solution {
+public:
+        vector<string> result;
+        void addPare(int n, int k1, int k2, string str) {
+                if(k1 == n && k2 == n) {
+                        result.push_back(str);
+                        return;
+                }
+                if( k1 < n ) {
+                        //string temp(str);
+                        //temp += "(";
+                        addPare(n, k1+1, k2, str+"(");
+                }
+                if(k1>k2) {
+                        //string temp(str);
+                        //temp += ")";
+                        addPare(n, k1, k2+1, str+")");
+                }
+        }
+        vector<string> generateParenthesis(int n) {
+                if( n<1 )
+                        return result;
+                string str("");
+                addPare(n, 0, 0, str);
+                return result;
+        }
+};
+
+int main(void) {
+
+        Solution s;
+        vector<string> ret(s.generateParenthesis(3));
+        for(int i=0; i<ret.size(); i++)
+                printf("%s\t", ret[i].c_str());
+        printf("\n");
+        return 0;
+}
